@@ -9,50 +9,40 @@
         body {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            height: 100%;
             margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
+
         }
 
+        footer,
         header {
             background-color: #3899B4;
             color: #fff;
-            padding: 1px;
+            padding: 5px;
             text-align: left;
             display: flex;
-            /* Thêm dòng này để logo và tiêu đề sẽ nằm cạnh nhau */
             align-items: center;
-            height: 44px;
+            height: 5vh;
         }
 
         header #logo {
             margin-right: 10px;
-            /* Cách logo ra một khoản nhỏ */
         }
 
         header img {
             width: 50px;
-            /* Giảm kích thước logo */
             height: auto;
         }
 
         header h1 {
             font-size: 15px;
-            /* Giảm kích thước font của tiêu đề */
             margin: 0;
-            /* Đảm bảo không có khoảng cách trên dưới */
-        }
-
-        footer {
-            background-color: #3899B4;
-            color: #fff;
-            padding: 10px;
-            text-align: left;
-            margin-top: auto;
-            height: 22px;
         }
 
         .container {
+            min-height: 100vh;
             display: flex;
             flex: 1;
         }
@@ -62,8 +52,8 @@
             flex-direction: column;
             width: 200px;
             padding: 10px;
-            overflow-y: auto;
-            max-height: calc(100vh - 44px - 22px);
+            overflow-y: hidden;
+            max-height: 90vh;
         }
 
         .sidebarsp {
@@ -71,8 +61,8 @@
             flex-direction: column;
             width: 100%;
             padding: 10px;
-            overflow-y: auto;
-            max-height: calc(100vh - 44px - 22px);
+            overflow-y: hidden;
+            max-height: 80vh;
         }
 
         .nhomsp,
@@ -80,28 +70,22 @@
             padding: 10px;
             background-color: #f2f2f2;
             margin-bottom: 10px;
-            /* Add space between sections */
 
         }
 
         .nhomsp ul,
         .sp ul {
             max-height: calc((100vh - 44px - 22px)/3);
-            /* Limit the height of the scrollable area */
             overflow-y: auto;
-            /* Make it scrollable */
         }
 
-        .nhomsp h2,
-        .sp h2 {
-            font-size: 14px;
-            /* Điều chỉnh kích thước font */
+        h2 {
+            font-size: 20px;
         }
 
         .nhomsp label,
         .sp label {
             font-size: 12px;
-            /* Điều chỉnh kích thước chữ cho nhãn */
         }
 
         .sp h2,
@@ -111,7 +95,6 @@
 
         .search-input {
             width: 100%;
-            /* Điều chỉnh chiều rộng của ô search */
             padding: 8px;
             margin-bottom: 10px;
             box-sizing: border-box;
@@ -142,7 +125,6 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
-            /* Ensure no extra space around the list */
         }
 
         li {
@@ -186,8 +168,7 @@
                     src="https://wecare-ii.crm5.dynamics.com/%7b638512693250000198%7d/webresources/new_logo"
                     class="header_logo header-logo" alt="Siêu thị công nghiệp Wecare">
             </a>
-        </div>
-        <h1 style="margin-top: 0; margin-bottom: 0;">Đồng hành cùng sản xuất</h1>
+            <h1 style="margin-top: 0; margin-bottom: 0;">Đồng hành cùng sản xuất</h1>
     </header>
 
     <div class="container">
@@ -383,7 +364,7 @@
                     <td>${item.crdfd_sanphamtext}</td>
                     <td style="text-align: center">${item.crdfd_onvichuan}</td>
                     <td style="text-align: center">${thousands_separators(item.crdfd_gia)}</td>
-                    <td style="text-align: center">${convertDatetime(item.crdfd_ngaybaogia)}</td>
+                    <td style="text-align: center"  >${convertDatetime(item.crdfd_ngaybaogia)}</td>
                 </tr>`;
             });
             document.getElementById('table_bg').innerHTML = tableContent;
