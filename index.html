@@ -42,7 +42,7 @@
         }
 
         .container {
-            min-height: 100vh;
+            max-height: 100vh;
             display: flex;
             flex: 1;
         }
@@ -53,10 +53,10 @@
             width: 200px;
             padding: 10px;
             overflow-y: hidden;
-            max-height: 90vh;
+            max-height: 100vh;
         }
 
-        .sidebarsp {
+        .sidebarbg {
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -65,7 +65,6 @@
             max-height: 80vh;
         }
 
-        .nhomsp,
         .sp {
             padding: 10px;
             background-color: #f2f2f2;
@@ -73,7 +72,6 @@
 
         }
 
-        .nhomsp ul,
         .sp ul {
             max-height: calc((100vh - 44px - 22px)/3);
             overflow-y: auto;
@@ -83,12 +81,10 @@
             font-size: 20px;
         }
 
-        .nhomsp label,
         .sp label {
             font-size: 12px;
         }
 
-        .sp h2,
         .nhomsp h2 {
             font-size: 14px;
         }
@@ -110,7 +106,6 @@
             border-collapse: collapse;
         }
 
-        th,
         td {
             border: 1px solid #000;
             padding: 8px;
@@ -204,8 +199,8 @@
         </div>
 
         <div class="content">
-            <h2>Danh Sách Sản Phẩm</h2>
-            <div class="sidebarsp">
+            <h2>Thông tin báo giá</h2>
+            <div class="sidebarbg">
                 <table id="productTable">
                     <thead>
                         <tr>
