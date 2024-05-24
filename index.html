@@ -414,91 +414,116 @@
                 renderTable(filteredData, currentPage);
             }
         }
+        //Nhóm SP
+        const response_nhsp = async () => {
+            try {
+                const response = await fetch("https://prod-18.southeastasia.logic.azure.com:443/workflows/a3d799e6b59f4cba837d18847f125794/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=NvlAmzPi6r9eZ3sqnu4rma8gniAO8PXi-J9pqxXvbpk", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
 
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return null;
+            }
+        };
+        // SP
+        const response_sp = async () => {
+            try {
+                const response = await fetch("https://prod-56.southeastasia.logic.azure.com:443/workflows/7737e5299da14ceab4dfdf1fe659508a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pduDGOrUOprMnazKTJ8fg3IstfXXTLjzVPQa_BebDPg", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return null;
+            }
+        };
+        //Báo giá
+        const response_bg = async () => {
+            try {
+                const response = await fetch("https://prod-56.southeastasia.logic.azure.com:443/workflows/d5e7febfe3454c27bf9f8f3c0b95c256/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=0yncQeACMvUocAuzy_LxqUmIn9eMAoRzHvuUxmTU5Hw", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                return null;
+            }
+        };
+        //định dạng số
+        function thousands_separators(num) {
+            var num_parts = num.toString().split(",");
+            num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            return num_parts.join(".");
+        }
+        //định dạng ngày 
+        function convertDatetime(dateTime) {
+            var day = new Date(dateTime);
+
+            var dd = day.getDate();
+            var mm = day.getMonth() + 1;
+
+            var yyyy = day.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            var dayTime = dd + "/" + mm + "/" + yyyy;
+            return dayTime;
+        }
         //Get data
         async function getData() {
             try {
-                
-                //Nhóm SP
-                const response_nhsp = async () => {
-                    try {
-                        const response = await fetch("https://prod-18.southeastasia.logic.azure.com:443/workflows/a3d799e6b59f4cba837d18847f125794/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=NvlAmzPi6r9eZ3sqnu4rma8gniAO8PXi-J9pqxXvbpk", {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            }
-                        });
 
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
 
-                        const result = await response.json();
-                        return result;
-                    } catch (error) {
-                        console.error("Error fetching data:", error);
-                        return null;
-                    }
-                };
 
                 const data_nhsp = await response_nhsp();
-                
+
                 let td = "";
                 for (let i = 0; i < data_nhsp.value.length; i++) {
                     td += `<li><input type="checkbox" value="${data_nhsp.value[i].crdfd_manhomsp}" onclick="filterGroups()"><label>${data_nhsp.value[i].crdfd_productname}</label></li>`;
                 }
                 document.getElementById("filter_nhsp").innerHTML = td;
 
-                // SP
-                const response_sp = async () => {
-                    try {
-                        const response = await fetch("https://prod-56.southeastasia.logic.azure.com:443/workflows/7737e5299da14ceab4dfdf1fe659508a/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=pduDGOrUOprMnazKTJ8fg3IstfXXTLjzVPQa_BebDPg", {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            }
-                        });
 
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-
-                        const result = await response.json();
-                        return result;
-                    } catch (error) {
-                        console.error("Error fetching data:", error);
-                        return null;
-                    }
-                };
                 const sp = await response_sp();
                 data_sp = sp.value;
                 filteredSP = data_sp;
                 renderSP(filteredSP);
 
-                //Báo giá
-                const response_bg = async () => {
-                    try {
-                        const response = await fetch("https://prod-56.southeastasia.logic.azure.com:443/workflows/d5e7febfe3454c27bf9f8f3c0b95c256/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=0yncQeACMvUocAuzy_LxqUmIn9eMAoRzHvuUxmTU5Hw", {
-                            method: 'POST',
-                            headers: {
-                                'Accept': 'application/json',
-                                'Content-Type': 'application/json'
-                            }
-                        });
 
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-
-                        const result = await response.json();
-                        return result;
-                    } catch (error) {
-                        console.error("Error fetching data:", error);
-                        return null;
-                    }
-                };
                 const data = await response_bg();
                 data_bg = data.value; // Lưu dữ liệu sản phẩm vào biến toàn cục
                 filteredData = data_bg; // Khởi tạo dữ liệu đã lọc với toàn bộ dữ liệu
