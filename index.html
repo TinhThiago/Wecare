@@ -231,7 +231,7 @@
                             <th>Nhóm đối tượng</th>
                             <th>Sản phẩm</th>
                             <th>Đơn vị</th>
-                            <th>Giá</th>
+                            <th>Giá (VNĐ)</th>
                             <th>Ngày báo giá</th>
                         </tr>
                     </thead>
@@ -381,9 +381,9 @@
                 tableContent += `<tr data-group="${item.crdfd_manhomsanpham}">
                     <td>${item.crdfd_nhomoituongtext}</td>
                     <td>${item.crdfd_sanphamtext}</td>
-                    <td>${item.crdfd_onvichuan}</td>
-                    <td>${item.crdfd_gia} VND</td>
-                    <td>${item.crdfd_ngaybaogia}</td>
+                    <td style="text-align: center">${item.crdfd_onvichuan}</td>
+                    <td style="text-align: center">${thousands_separators(item.crdfd_gia)}</td>
+                    <td style="text-align: center">${convertDatetime(item.crdfd_ngaybaogia)}</td>
                 </tr>`;
             });
             document.getElementById('table_bg').innerHTML = tableContent;
